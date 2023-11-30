@@ -1,12 +1,17 @@
+import csv
+
+
+
+
+
+
 class Michis:
     descuento_comida = 0.8
     all = []
 
     def __init__(self, nombre_michi: str, edad_michi: float, comida_michi=0):
-
         # corremos las validaciones de los argumentos
-        assert comida_michi > - \
-            1, f"La comida no puede ser menor a {comida_michi}"
+        assert comida_michi > -1, f"La comida no puede ser menor a {comida_michi}"
 
         # Asignamos los valores de los objetos
         self.nombre_michi = nombre_michi
@@ -26,14 +31,31 @@ class Michis:
     def __repr__(self):  # mirar el otro metodo que seria __str__
         return f"Michis('{self.nombre_michi}','{self.edad_michi}''{self.comida_michi}')"
 
+    @classmethod
+    def instanciate_from_csv(cls):
+        with open('gatos.csv','r') as f:
+            reader = csv.DictReader(f)
+            items = list(reader)
 
-gato1 = Michis('Tribilla_mama', 7, 8)
-gato2 = Michis("Gordilla", 7, 8)
+        for item in items:
+            print(item)
+
+
+
+
+Michis.instanciate_from_csv()
+
+# gato1 = Michis("Tribilla_mama", 7, 8)
+# gato2 = Michis("Gordilla", 7, 8)
+# gato3 = Michis("Agni", 2, 8)
+# gato4 = Michis("Rudra", 2, 8)
+# gato5 = Michis("Panterita", 3, 8)
+# gato6 = Michis("Pollito", 1, 8)
 
 print(Michis.all)
 
-for michi in Michis.all:
-    print(michi.nombre_michi)
+# for michi in Michis.all:
+#     print(michi.nombre_michi)
 
 # print(gato1.descuento_michi())
 # print(gato1.total_comida_michi())
